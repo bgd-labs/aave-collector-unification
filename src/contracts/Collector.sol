@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
-import {SafeERC20} from 'solidity-utils/contracts/oz-common/SafeERC20.sol';
-import {Address} from 'solidity-utils/contracts/oz-common/Address.sol';
+import {IERC20} from './dependencies/interfaces/IERC20.sol';
+import {SafeERC20} from './dependencies/SafeERC20.sol';
+import {Address} from './dependencies/Address.sol';
 import {ICollector} from '../interfaces/ICollector.sol';
 import {VersionedInitializable} from '../libs/VersionedInitializable.sol';
 import {ReentrancyGuard} from '../libs/ReentrancyGuard.sol';

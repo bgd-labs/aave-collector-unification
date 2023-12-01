@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {Test} from 'forge-std/Test.sol';
 import {ILendingPool, DataTypes} from 'aave-address-book/AaveV2.sol';
-import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
+import {IERC20} from '../src/contracts/dependencies/interfaces/IERC20.sol';
 import {TestWithExecutor} from 'aave-helpers/GovHelpers.sol';
 import {IAToken} from '../src/interfaces/IAToken.sol';
 import {IAaveIncentivesController} from '../src/interfaces/v2/IAaveIncentivesController.sol';

@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {Test} from 'forge-std/Test.sol';
 
-import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
+import {IERC20} from '../src/contracts/dependencies/interfaces/IERC20.sol';
 import {Collector} from '../src/contracts/Collector.sol';
 
 contract CollectorTest is Test {

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import {Test} from 'forge-std/Test.sol';
-import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
+import {IERC20} from '../src/contracts/dependencies/interfaces/IERC20.sol';
 import {AaveV2Ethereum, AaveGovernanceV2, AaveV3Polygon, AaveV3Avalanche, AaveV3Optimism, AaveV3Arbitrum, AaveV3Fantom, AaveV3Harmony, AaveMisc} from 'aave-address-book/AaveAddressBook.sol';
 import {AaveV2EthereumAssets} from 'aave-address-book/AaveV2Ethereum.sol';
 import {AaveV3PolygonAssets} from 'aave-address-book/AaveV3Polygon.sol';

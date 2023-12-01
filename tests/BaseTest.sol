@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import {Test} from 'forge-std/Test.sol';
-import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
+import {IERC20} from '../src/contracts/dependencies/interfaces/IERC20.sol';
 import {ProxyHelpers} from 'aave-helpers/ProxyHelpers.sol';
 import {TestWithExecutor} from 'aave-helpers/GovHelpers.sol';
 import {ICollector} from '../src/interfaces/ICollector.sol';
