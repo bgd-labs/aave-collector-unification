@@ -45,7 +45,7 @@ contract DeployPolygon is Script {
     new MigrateV2CollectorPayload(
       address(AaveV2Polygon.POOL),
       address(AaveV2Polygon.POOL_CONFIGURATOR),
-      AaveV2Polygon.COLLECTOR,
+      address(AaveV2Polygon.COLLECTOR),
       POLYGON_COLLECTOR,
       AaveV2Polygon.DEFAULT_INCENTIVES_CONTROLLER,
       address(migrationCollector),
@@ -90,7 +90,7 @@ contract DeployAvalanche is Script {
     new MigrateV2CollectorPayload(
       address(AaveV2Avalanche.POOL),
       address(AaveV2Avalanche.POOL_CONFIGURATOR),
-      AaveV2Avalanche.COLLECTOR,
+      address(AaveV2Avalanche.COLLECTOR),
       AVALANCHE_COLLECTOR,
       AaveV2Avalanche.DEFAULT_INCENTIVES_CONTROLLER, // Avalanche v2 Incentives Controller
       address(migrationCollector),
