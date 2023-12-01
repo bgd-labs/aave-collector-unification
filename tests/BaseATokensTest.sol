@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {Test} from 'forge-std/Test.sol';
 import {ILendingPool, DataTypes} from 'aave-address-book/AaveV2.sol';
 import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
-import {TestWithExecutor} from 'aave-helpers/GovHelpers.sol';
+import {GovHelpers} from 'aave-helpers/GovHelpers.sol';
 import {IAToken} from '../src/interfaces/IAToken.sol';
 import {IAaveIncentivesController} from '../src/interfaces/v2/IAaveIncentivesController.sol';
 
@@ -12,12 +12,13 @@ string constant migrationCollectorArtifact = 'out/AaveMigrationCollector.sol/Aav
 string constant aTokenArtifact = 'out/AToken.sol/AToken.json';
 string constant migrateV2CollectorArtifact = 'out/MigrateV2CollectorPayload.sol/MigrateV2CollectorPayload.json';
 
-abstract contract BaseATokensTest is TestWithExecutor {
+abstract contract BaseATokensTest is Test {
   address internal payload;
-  ILendingPool internal _v2pool;
-  IAaveIncentivesController internal _incentivesController;
   address internal _v2collector;
   address internal _collector;
+  address internal _executor;
+  ILendingPool internal _v2pool;
+  IAaveIncentivesController internal _incentivesController;
 
   function _setUp(
     ILendingPool v2pool,
@@ -48,7 +49,7 @@ abstract contract BaseATokensTest is TestWithExecutor {
       )
     );
 
-    _selectPayloadExecutor(executor);
+    _executor = executor;
   }
 
   function testATokensTransferedAndImplUpdated() public {
@@ -72,7 +73,7 @@ abstract contract BaseATokensTest is TestWithExecutor {
     address rewardToken = _incentivesController.REWARD_TOKEN();
 
     // Act
-    _executePayload(payload);
+    GovHelpers.executePayload(vm, payload, _executor);
 
     // Assert
     for (uint256 i = 0; i < aTokens.length; i++) {
@@ -102,7 +103,7 @@ abstract contract BaseATokensTest is TestWithExecutor {
     address user = vm.addr(0xA11CEB);
 
     // Act
-    _executePayload(payload);
+    GovHelpers.executePayload(vm, payload, _executor);
 
     for (uint256 i = 0; i < reserves.length; i++) {
       reserveData = _v2pool.getReserveData(reserves[i]);

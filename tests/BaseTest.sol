@@ -4,19 +4,20 @@ pragma solidity ^0.8.0;
 import {Test} from 'forge-std/Test.sol';
 import {IERC20} from 'solidity-utils/contracts/oz-common/interfaces/IERC20.sol';
 import {ProxyHelpers} from 'aave-helpers/ProxyHelpers.sol';
-import {TestWithExecutor} from 'aave-helpers/GovHelpers.sol';
+import {GovHelpers} from 'aave-helpers/GovHelpers.sol';
 import {ICollector} from '../src/interfaces/ICollector.sol';
 import {IInitializableAdminUpgradeabilityProxy} from '../src/interfaces/IInitializableAdminUpgradeabilityProxy.sol';
 import {UpgradeAaveCollectorPayload} from '../src/contracts/payloads/UpgradeAaveCollectorPayload.sol';
 import {Collector} from '../src/contracts/Collector.sol';
 
-abstract contract BaseTest is TestWithExecutor {
+abstract contract BaseTest is Test {
   UpgradeAaveCollectorPayload public payload;
   address internal _collectorProxy;
   address internal _collectorImpl;
   address internal _proxyAdmin;
   address internal _newFundsAdmin;
   uint256 internal _streamId;
+  address internal _executor;
   IERC20 internal _token;
 
   function _setUp(
@@ -42,7 +43,7 @@ abstract contract BaseTest is TestWithExecutor {
       _newFundsAdmin,
       _streamId
     );
-    _selectPayloadExecutor(executor);
+    _executor = executor;
   }
 
   function testExecuteProxyAdminAndFundsAdminChanged() public {
@@ -58,7 +59,7 @@ abstract contract BaseTest is TestWithExecutor {
     }
 
     // Act
-    _executePayload(address(payload));
+    GovHelpers.executePayload(vm, address(payload), _executor);
 
     // Assert
     address implAfter = ProxyHelpers.getInitializableAdminUpgradeabilityProxyImplementation(

@@ -192,7 +192,7 @@ contract Collector is VersionedInitializable, ICollector, ReentrancyGuard {
 
   /// @inheritdoc ICollector
   function approve(IERC20 token, address recipient, uint256 amount) external onlyFundsAdmin {
-    token.safeApprove(recipient, amount);
+    token.forceApprove(recipient, amount);
   }
 
   /// @inheritdoc ICollector

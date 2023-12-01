@@ -14,8 +14,8 @@ contract ProposalTestPolygon is BaseATokensTest {
       AaveV2Polygon.POOL,
       IAaveIncentivesController(0x357D51124f59836DeD84c8a1730D72B749d8BC23),
       address(AaveV2Polygon.POOL_CONFIGURATOR),
-      AaveV2Polygon.COLLECTOR,
-      AaveV3Polygon.COLLECTOR,
+      address(AaveV2Polygon.COLLECTOR),
+      address(AaveV3Polygon.COLLECTOR),
       AaveGovernanceV2.POLYGON_BRIDGE_EXECUTOR
     );
   }
@@ -28,8 +28,8 @@ contract ProposalTestAvalanche is BaseATokensTest {
       AaveV2Avalanche.POOL,
       IAaveIncentivesController(0x01D83Fe6A10D2f2B7AF17034343746188272cAc9),
       address(AaveV2Avalanche.POOL_CONFIGURATOR),
-      AaveV2Avalanche.COLLECTOR,
-      AaveV3Avalanche.COLLECTOR,
+      address(AaveV2Avalanche.COLLECTOR),
+      address(AaveV3Avalanche.COLLECTOR),
       address(0x01244E7842254e3FD229CD263472076B1439D1Cd) // Avalanche v2 Guardian, permissions should be transferred to 0xa35b76E4935449E33C56aB24b23fcd3246f13470
     );
   }

@@ -2,8 +2,8 @@
 pragma solidity >=0.8.0;
 
 import {Script} from 'forge-std/Script.sol';
-
-import {AaveV2Ethereum, AaveV2Avalanche, AaveV2Polygon, AaveV3Polygon, AaveV3Avalanche, AaveV3Optimism, AaveV3Arbitrum, AaveV3Fantom, AaveV3Harmony, AaveGovernanceV2, AaveGovernanceV2, AaveMisc} from 'aave-address-book/AaveAddressBook.sol';
+import 'aave-address-book/AaveAddressBook.sol';
+// import {AaveV2Ethereum, AaveV2Avalanche, AaveV2Polygon, AaveV3Polygon, AaveV3Avalanche, AaveV3Optimism, AaveV3Arbitrum, AaveV3Fantom, AaveV3Harmony, AaveGovernanceV2, AaveGovernanceV2} from 'aave-address-book/AaveAddressBook.sol';
 import {UpgradeAaveCollectorPayload} from '../src/contracts/payloads/UpgradeAaveCollectorPayload.sol';
 import {Collector} from '../src/contracts/Collector.sol';
 
@@ -17,9 +17,9 @@ contract DeployMainnet is Script {
     collector.initialize(AaveGovernanceV2.SHORT_EXECUTOR, 0);
 
     new UpgradeAaveCollectorPayload(
-      AaveV2Ethereum.COLLECTOR,
+      address(AaveV2Ethereum.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_ETHEREUM,
+      MiscEthereum.PROXY_ADMIN,
       AaveGovernanceV2.SHORT_EXECUTOR,
       0
     );
@@ -35,9 +35,9 @@ contract DeployPolygon is Script {
     collector.initialize(AaveGovernanceV2.POLYGON_BRIDGE_EXECUTOR, 0);
 
     new UpgradeAaveCollectorPayload(
-      AaveV3Polygon.COLLECTOR,
+      address(AaveV3Polygon.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_POLYGON,
+      MiscPolygon.PROXY_ADMIN,
       AaveGovernanceV2.POLYGON_BRIDGE_EXECUTOR,
       DEFAULT_STREAM_ID
     );
@@ -54,9 +54,9 @@ contract DeployAvalanche is Script {
     collector.initialize(address(0xa35b76E4935449E33C56aB24b23fcd3246f13470), 0); // Avalanche v3 Guardian
 
     new UpgradeAaveCollectorPayload(
-      AaveV3Avalanche.COLLECTOR,
+      address(AaveV3Avalanche.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_AVALANCHE,
+      MiscAvalanche.PROXY_ADMIN,
       address(0xa35b76E4935449E33C56aB24b23fcd3246f13470), // Avalanche v3 Guardian
       DEFAULT_STREAM_ID
     );
@@ -73,9 +73,9 @@ contract DeployOptimism is Script {
     collector.initialize(AaveGovernanceV2.OPTIMISM_BRIDGE_EXECUTOR, 0);
 
     new UpgradeAaveCollectorPayload(
-      AaveV3Optimism.COLLECTOR,
+      address(AaveV3Optimism.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_OPTIMISM,
+      MiscOptimism.PROXY_ADMIN,
       AaveGovernanceV2.OPTIMISM_BRIDGE_EXECUTOR,
       DEFAULT_STREAM_ID
     );
@@ -91,9 +91,9 @@ contract DeployArbitrum is Script {
     collector.initialize(AaveGovernanceV2.ARBITRUM_BRIDGE_EXECUTOR, 0);
 
     new UpgradeAaveCollectorPayload(
-      AaveV3Arbitrum.COLLECTOR,
+      address(AaveV3Arbitrum.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_ARBITRUM,
+      MiscArbitrum.PROXY_ADMIN,
       AaveGovernanceV2.ARBITRUM_BRIDGE_EXECUTOR,
       DEFAULT_STREAM_ID
     );
@@ -109,9 +109,10 @@ contract DeployFantom is Script {
     collector.initialize(address(0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), 0); // Guardian
 
     new UpgradeAaveCollectorPayload(
-      AaveV3Fantom.COLLECTOR,
+      address(AaveV3Fantom.COLLECTOR),
       address(collector),
-      AaveMisc.PROXY_ADMIN_FANTOM,
+      // MiscFantom.PROXY_ADMIN,
+      address(0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), // Guardian
       address(0xf71fc92e2949ccF6A5Fd369a0b402ba80Bc61E02), // Guardian
       DEFAULT_STREAM_ID
     );
